@@ -1,0 +1,50 @@
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+/* Slick Carousel CSS */
+/* Custom Scrollbar Styles */
+/* Hide the scrollbar initially */
+.custom-scrollbar {
+  scrollbar-width: thin;  /* Firefox: Set a thin scrollbar */
+  scrollbar-color: #007BFF #f1f1f1;  /* Firefox: Blue thumb with light gray track */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* Thinner scrollbar */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease; /* Smooth transition when it appears */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #007BFF; /* Blue color for the thumb */
+  border-radius: 10px; /* Rounded edges */
+  border: 2px solid #FFFFFF; /* Slight white border around thumb */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Light gray background for track */
+  border-radius: 10px; /* Rounded edges */
+  margin: 4px; /* Adding gap between thumb and track */
+}
+
+/* Show the scrollbar when scrolling */
+.custom-scrollbar:hover::-webkit-scrollbar {
+  opacity: 1; /* Show scrollbar when hovering */
+}
+
+.custom-scrollbar::-webkit-scrollbar:active {
+  opacity: 1; /* Keep the scrollbar visible when active */
+}
+/* Custom CSS for Toaster */
+.toaster {
+  background-color: blue !important; /* Default background */
+  color: white !important; /* Default text color */
+}
+
+.toaster-success {
+  background-color: green !important; /* Success background */
+  color: white !important; /* Success text color */
+}
+
+.toaster-error {
+  background-color: red !important; /* Error background */
+  color: white !important; /* Error text color */
+}
