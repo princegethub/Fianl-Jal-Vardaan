@@ -1,6 +1,7 @@
 import React from "react";
-import ZIGZAG2 from "../../assets/ZigZag2.webp";
-import ZIGZAG1 from "../../assets/ZigZag1.jpg";
+import ZIGZAG2 from '@/assets/ZigZag2.webp';
+
+import ZIGZAG1 from "@/assets/ZigZag1.jpg";
 
 function ZigZag() {
   return (
