@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Card from "../Card";
 
 // Importing images
-import ManageGp from "../../assets/Card Logo/ManageGp.png";
-import Asset from "../../assets/Card Logo/assests.png";
-import AlretIcon from "../../assets/Card Logo/alert icon.png";
-import Inventory from "../../assets/Card Logo/inventory.png";
-import Annoucement from "../../assets/Card Logo/announcement 1.png";
-import Finance from "../../assets/Card Logo/finan_ico 1.png";
-import HandImg from "../../assets/PHED/rqstFund.png";
+import ManageGp from '@/assets/Card Logo/ManageGp.png';
+import Asset from '@/assets/Card Logo/assests.png';
+import AlretIcon from '@/assets/Card Logo/alert icon.png';
+import Inventory from '@/assets/Card Logo/inventory.png';
+import Annoucement from '@/assets/Card Logo/announcement 1.png';
+import Finance from '@/assets/Card Logo/finan_ico 1.png';
+import HandImg from '@/assets/PHED/rqstFund.png';
 
 import SlickSlider from "./Slider";
 import { useSelector } from 'react-redux';
