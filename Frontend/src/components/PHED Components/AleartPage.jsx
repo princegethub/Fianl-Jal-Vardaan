@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AlertListCard from "./AlertListCard";
 import AlertDetailsDialog from "./AlertDetailsDialog";
-import HandImg from "../../assets/PHED/Hand.png";
+import HandImg from "@/assets/PHED/Hand.png";
 import "../../App.css";
 import { useAlreatPhedQuery, useStatusCompletealreatPhedMutation } from "@/features/api/phedApi";
 import { toast } from "sonner";

@@ -1,5 +1,5 @@
 import React from "react";
-import Hero from "../../assets/hero.svg";
+import Hero from "@/assets/hero.svg";
 
 
 function HeroPage() {

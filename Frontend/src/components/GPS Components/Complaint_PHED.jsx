@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ListIllustration from "../../assets/GPS/RqstList-illustration.png"; // Replace with your illustration path
-import FormIllustration from "../../assets/GPS/RqstForm-illustration.png"; // Replace with your illustration path
+import ListIllustration from "@/assets/GPS/RqstList-illustration.png"; // Replace with your illustration path
+import FormIllustration from "@/assets/GPS/RqstForm-illustration.png"; // Replace with your illustration path
 import {
   useAddGpComplaintMutation,
   useGetGpComplaintListQuery,

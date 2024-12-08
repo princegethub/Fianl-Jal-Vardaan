@@ -3,10 +3,10 @@ import Illustration from "./Illustration";
 import Form from "./ManageGpFrom";
 import { useSelector } from "react-redux";
 import List from "./ManageGpList";
-import Image1 from "../../assets/PHED/addlist.png";
-import Image2 from "../../assets/PHED/List.png";
+import Image1 from "@/assets/PHED/addlist.png";
+import Image2 from "@/assets/PHED/List.png";
 import { useNavigate } from "react-router";
-import { useGpListFetchQuery } from "../../features/api/phedApi";
+import { useGpListFetchQuery } from "@/features/api/phedApi";
 
 const ManageGpsPage = () => {
   const [isAdding, setIsAdding] = useState(false);

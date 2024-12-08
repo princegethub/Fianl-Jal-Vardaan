@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../assets/Logo.png";
-import LoginIllu from "../assets/Login_illu.png";
+import Logo from "@/assets/Logo.png";
+import LoginIllu from "@/assets/Login_illu.png";
 import { useNavigate } from "react-router-dom";
 import { useLoginMutation, useLogoutMutation } from "../features/api/authApi";
 import { Loader2 } from "lucide-react";

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import RqstListIllustration from "../../assets/GPS/RqstList-illustration.png";
-import RqstFormIllustration from "../../assets/GPS/RqstForm-illustration.png";
+import RqstListIllustration from "@/assets/GPS/RqstList-illustration.png";
+import RqstFormIllustration from "@/assets/GPS/RqstForm-illustration.png";
 import {
   useCreateGpFundRequestMutation,
   useGpFundRequestQuery,

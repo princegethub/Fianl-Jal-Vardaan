@@ -5,16 +5,16 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Card from "../Card";
 
 // Importing images
-import ManageGp from "../../assets/Card Logo/ManageGp.png";
-import Asset from "../../assets/Card Logo/assests.png";
-import AlretIcon from "../../assets/Card Logo/alert icon.png";
-import Inventory from "../../assets/Card Logo/inventory.png";
-import Annoucement from "../../assets/Card Logo/announcement 1.png";
-import Finance from "../../assets/Card Logo/finan_ico 1.png";
-import PushNotification from "../../assets/GPS/PushNotification.svg";
-import Payment from "../../assets/GPS/Payment.svg";
-import RqstFund from "../../assets/GPS/RqstFund.svg";
-import ManageIOT from "../../assets/GPS/ManageIOT.svg";
+import ManageGp from "@/assets/Card Logo/ManageGp.png";
+import Asset from "@/assets/Card Logo/assests.png";
+import AlretIcon from "@/assets/Card Logo/alert icon.png";
+import Inventory from "@/assets/Card Logo/inventory.png";
+import Annoucement from "@/assets/Card Logo/announcement 1.png";
+import Finance from "@/assets/Card Logo/finan_ico 1.png";
+import PushNotification from "@/assets/GPS/PushNotification.svg";
+import Payment from "@/assets/GPS/Payment.svg";
+import RqstFund from "@/assets/GPS/RqstFund.svg";
+import ManageIOT from "@/assets/GPS/ManageIOT.svg";
 import SlickSlider from "../PHED Components/Slider";
 
 function Dashboard_Gps() {

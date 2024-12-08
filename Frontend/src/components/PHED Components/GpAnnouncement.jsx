@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Illustration from "./Illustration"; // Reusable Illustration Component
-import Image2 from "../../assets/PHED/announcement.png"; // Illustration for Add Announcement
-import Image1 from "../../assets/PHED/announcement1.png"; // Illustration for Send Announcement
+import Image2 from "@/assets/PHED/announcement.png"; // Illustration for Add Announcement
+import Image1 from "@/assets/PHED/announcement1.png"; // Illustration for Send Announcement
 import { useCreatePhedAnnouncementMutation, useViewAnnouncementListQuery } from "../../features/api/phedApi";
 import { toast } from "sonner";
 const GpAnnouncement = () => {

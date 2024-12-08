@@ -1,12 +1,12 @@
 import React from 'react'
-import symbol from    "../../assets/nationalSymbol.svg"
-import azadi from    "../../assets/azadilogo.svg"
-import itulogo from    "../../assets/ITULOGO.svg"
-import staysavelogo  from    "../../assets/staysavelog.svg"
-import instalogo  from    "../../assets/instalogo.svg"
-import tweeterlogo  from    "../../assets/twiterlogo.svg"
-import facebooklogo  from    "../../assets/facebooklogo.svg"
-import youtube  from    "../../assets/youtube.svg"
+import symbol from    "@/assets/nationalSymbol.svg"
+import azadi from    "@/assets/azadilogo.svg"
+import itulogo from    "@/assets/ITULOGO.svg"
+import staysavelogo  from    "@/assets/staysavelog.svg"
+import instalogo  from    "@/assets/instalogo.svg"
+import tweeterlogo  from    "@/assets/twiterlogo.svg"
+import facebooklogo  from    "@/assets/facebooklogo.svg"
+import youtube  from    "@/assets/youtube.svg"
 
 export default function TopHeader() {
     // console.log(nationalsymbol);

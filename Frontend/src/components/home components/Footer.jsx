@@ -1,10 +1,10 @@
 import React from "react";
-import DigtalIndia from "../../assets/digital-india.png";
-import MakeInIndia from "../../assets/makeinindia.png";
-import IndiaGov from "../../assets/india-gov.png";
-import Goidirectory from "../../assets/goidirectory.png";
-import DataGov from "../../assets/data-gov.png";
-import MyGov from "../../assets/mygov.png";
+import DigtalIndia from "@/assets/digital-india.png";
+import MakeInIndia from "@/assets/makeinindia.png";
+import IndiaGov from "@/assets/india-gov.png";
+import Goidirectory from "@/assets/goidirectory.png";
+import DataGov from "@/assets/data-gov.png";
+import MyGov from "@/assets/mygov.png";
 
 function Footer() {
   return (

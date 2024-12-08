@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import GPAlertListCard from "./GPAlertListCard";
 import GPAlertDetailsDialog from "./GPAlertDetailsDialog";
-import HandImg from "../../assets/GPS/Hand.png"; // Replace with your specific image
+import HandImg from "@/assets/GPS/Hand.png"; // Replace with your specific image
 import "../../App.css";
 
 function GPAlertPage() {

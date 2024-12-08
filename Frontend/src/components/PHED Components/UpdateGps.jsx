@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Image1 from "../../assets/PHED/addlist.png";
+import Image1 from "@/assets/PHED/addlist.png";
 import { Link, useNavigate, useParams } from "react-router-dom"; // Use correct "react-router-dom"
 import {
   useGpUpdateMutation,

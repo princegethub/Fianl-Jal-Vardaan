@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ListIllustration from "../../assets/GPS/RqstList-illustration.png"; // Replace with your illustration path
-import FormIllustration from "../../assets/GPS/RqstForm-illustration.png"; // Replace with your illustration path
+import ListIllustration from "@/assets/GPS/RqstList-illustration.png"; // Replace with your illustration path
+import FormIllustration from "@/assets/GPS/RqstForm-illustration.png"; // Replace with your illustration path
 import { useSubmitIncomeMutation, useSubmitExpenditureMutation } from "../../features/api/gpApi"; // Replace with your actual API import
 const ReceiptsPage = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);

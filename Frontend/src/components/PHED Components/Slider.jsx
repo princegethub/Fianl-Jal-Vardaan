@@ -2,11 +2,11 @@ autoplaySpeed: 3000 // Set autoplay to 3 seconds
 import React from 'react';
 import Slider from 'react-slick';
 // import Banner1 from '../../assets/banner1.jpg';
-import Banner1 from '../../assets/SliderBanner/banner1.png';
-import Banner2 from '../../assets/SliderBanner/banner2.png';
-import Banner3 from '../../assets/SliderBanner/banner4.jpg';
-// import Banner2 from '../../assets/banner2.jpg';
-// import Banner3 from '../../assets/banner3.jpg';
+import Banner1 from '@/assets/SliderBanner/banner1.png';
+import Banner2 from '@/assets/SliderBanner/banner2.png';
+import Banner3 from '@/assets/SliderBanner/banner4.jpg';
+// import Banner2 from '@/assets/banner2.jpg';
+// import Banner3 from '@/assets/banner3.jpg';
 
 
 function SlickSlider() {

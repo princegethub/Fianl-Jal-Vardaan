@@ -1,5 +1,5 @@
 import React from "react";
-import image from '../../assets/GPS/illustrator.svg';
+import image from '@/assets/GPS/illustrator.svg';
 
 const Illustration = ({ image, alt }) => (
   <div className="hidden lg:block w-full lg:w-[45%]">

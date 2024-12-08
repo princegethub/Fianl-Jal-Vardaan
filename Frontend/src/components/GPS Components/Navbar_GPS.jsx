@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../../assets/Logo.png";
+import Logo from "@/assets/Logo.png";
 import { Link } from "react-router-dom";
 import NotificationsDialog from "./Notfication_Dilog";
 import { useGetNotificationPhedQuery } from "@/features/api/gpApi";

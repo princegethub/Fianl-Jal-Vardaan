@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ListIllustration from "../../assets/GPS/list-illustration.png"; // Replace with your illustration path
-import FormIllustration from "../../assets/GPS/form-illustration.png"; // Replace with your illustration path
+import ListIllustration from "@/assets/GPS/list-illustration.png"; // Replace with your illustration path
+import FormIllustration from "@/assets/GPS/form-illustration.png"; // Replace with your illustration path
 import { useAddGpAnnoucementMutation, useGetGpAnnouncmentListQuery } from "@/features/api/gpApi";
 import { toast } from "sonner";
 

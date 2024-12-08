@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FundListCard from "./FundListCard";
 import FundDetailsDialog from "./FundDetailsDialog";
-import RqstFund from "../../assets/PHED/fundRqst.png";
+import RqstFund from "@/assets/PHED/fundRqst.png";
 import "../../App.css";
 import {
   useFundRequestedPhedQuery,

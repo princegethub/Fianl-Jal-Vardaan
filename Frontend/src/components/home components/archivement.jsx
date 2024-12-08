@@ -1,7 +1,7 @@
 import React from "react";
-import emeporment from "../../assets/image.png";
-import location from "../../assets/location.png";
-import waterquality from "../../assets/water quality.png";
+import emeporment from "@/assets/image.png";
+import location from "@/assets/location.png";
+import waterquality from "@/assets/water quality.png";
 
 export default function Archivement() {
   return (

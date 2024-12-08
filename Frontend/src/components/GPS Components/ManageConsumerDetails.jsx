@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "../ui/Button"; // Assuming the Button component is imported
-import Illustration from "../../assets/GPS/illustrator.svg";
+import Illustration from "@/assets/GPS/illustrator.svg";
 import { useAddConsumerMutation, useUpdateConsumerMutation } from "../../features/api/gpApi";
 import { toast } from "sonner";
 

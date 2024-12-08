@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import NotFoundImage from "../assets/NotFound.png"; // Add a relevant 404 illustration or icon here
+import NotFoundImage from "@/assets/NotFound.png"; // Add a relevant 404 illustration or icon here
 
 const PageNotFound = () => {
   const navigate = useNavigate();
