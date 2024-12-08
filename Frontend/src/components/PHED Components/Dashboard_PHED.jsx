@@ -4,7 +4,7 @@ import Card from "../Card";
 
 // Importing images
 import ManageGp from '@/assets/Card Logo/ManageGp.png';
-import Asset from '@/assets/Card Logo/assests.png';
+import Asset from '@/assets/Card Logo/Assests.png';
 import AlretIcon from '@/assets/Card Logo/alert icon.png';
 import Inventory from '@/assets/Card Logo/inventory.png';
 import Annoucement from '@/assets/Card Logo/announcement 1.png';
