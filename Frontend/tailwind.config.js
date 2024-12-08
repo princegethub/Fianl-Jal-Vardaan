@@ -51,8 +51,8 @@ export default {
   			}
   		},
   		fontFamily: {
-  			inknut: ['Inknut Antiqua"', 'serif'],
-  			grover: ['Irish Grover"', 'cursive']
+  			inknut: ['Inknut Antiqua', 'serif'],
+  			grover: ['Irish Grover', 'cursive']
   		},
   		fontSize: {
   			heading: '2rem'
