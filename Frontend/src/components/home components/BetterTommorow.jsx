@@ -1,5 +1,5 @@
 import React from "react";
-import WaterIllustration from "@assets/WaterIllustration.png"; // Replace with your image path
+import WaterIllustration from "@/assets/WaterIllustration.png"; // Replace with your image path
 
 function BetterTomorrow() {
   return (
