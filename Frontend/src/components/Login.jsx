@@ -37,6 +37,7 @@ function Login() {
     e.preventDefault(); // Prevent page reload
     try {
       const result = await login(inputData).unwrap(); // Use `.unwrap()` for handling results
+      console.log('result: ', result);
       
     } catch (err) {
       console.log('inputData: ', inputData);
