@@ -45,6 +45,7 @@ import AssestOverview from "./components/PHED Components/AsseetInvenotryOverview
 import { PersistGate } from "redux-persist/integration/react";
 import UserLayout from "./components/Users Component/UserLayout";
 import UserDeshboard from "./components/Users Component/UserDeshboard";
+import ResetPassword from "./components/ResetPassword";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,6 +57,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Public_Layout />} />
       <Route path="/" element={<Layout />}>
         <Route path="login" element={<Login />} />
+        <Route path="reset" element={<ResetPassword />} />
         <Route path="about" element={<About />} />
         <Route path="vision" element={<ZigZag />} />
         <Route path="contact" element={<BetterTomorrow />} />

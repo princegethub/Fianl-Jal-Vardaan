@@ -39,6 +39,46 @@ export const authApi = createApi({
         }
       },
     }),
+
+    
+    fogetPassword: builder.mutation({
+      query: (inputData) => ({
+        url: "/forgat-paasword",
+        method: "POST",
+        body: inputData,
+      }),
+      async onQueryStarted(args, { queryFulfilled, dispatch }) {
+        try {
+          const { data } = await queryFulfilled;
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+
+          dispatch(userLoggedIn({ user: data.user, token: data.token }));
+        } catch (error) {
+          console.error("Login error:", error);
+          throw error; // Optionally rethrow or handle the error in the UI
+        }
+      },
+    }),
+    resetPassword: builder.mutation({
+      query: (inputData) => ({
+        url: "/reset-paasword",
+        method: "POST",
+        body: inputData,
+      }),
+      async onQueryStarted(args, { queryFulfilled, dispatch }) {
+        try {
+          const { data } = await queryFulfilled;
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+
+          dispatch(userLoggedIn({ user: data.user, token: data.token }));
+        } catch (error) {
+          console.error("Login error:", error);
+          throw error; // Optionally rethrow or handle the error in the UI
+        }
+      },
+    }),
     
 
     logout: builder.mutation({
@@ -61,4 +101,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation } = authApi;
+export const { useLoginMutation, useLogoutMutation , useFogetPasswordMutation, useResetPasswordMutation } = authApi;
