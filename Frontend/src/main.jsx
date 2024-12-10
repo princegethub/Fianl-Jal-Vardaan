@@ -46,6 +46,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import UserLayout from "./components/Users Component/UserLayout";
 import UserDeshboard from "./components/Users Component/UserDeshboard";
 import ResetPassword from "./components/ResetPassword";
+import FinanceOverview from "./components/PHED Components/FinanceOverviewPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -75,6 +76,8 @@ const router = createBrowserRouter(
         <Route path="/phed/alerts" element={<AlertPage />} />
         <Route path="/phed/gpannouncement" element={<GpAnnouncement />} />
         <Route path="/phed/requestedfund" element={<RequestFundPage />} />
+        <Route path="/phed/finance" element={<FinanceOverview />} />
+        
       </Route>
 
       {/* GP Layout Route */}

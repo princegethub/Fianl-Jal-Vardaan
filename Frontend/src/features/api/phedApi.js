@@ -116,6 +116,14 @@ export const phedApi = createApi({
       }),
     }),
 
+    // View Single GP Inventory Query
+    financeOverView: builder.query({
+      query: (id) => ({
+        url: `/finance-overview/${id}`,
+        method: "GET",
+      }),
+    }),
+
     // Fetch Alerts Query
     alreatPhed: builder.query({
       query: () => ({
@@ -189,4 +197,5 @@ export const {
   useStatusCompleteFundRqstPhedMutation,
   useAssestOverviewPHeDQuery,
   useInvenotoryOverviewPHeDQuery,
+  useFinanceOverViewQuery,
 } = phedApi;

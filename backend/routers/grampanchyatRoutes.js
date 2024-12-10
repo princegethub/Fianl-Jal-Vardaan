@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { authenticate } = require("../middleweres/isAuthenticate");
 const gpController = require("../controller/grampanchyatController");
+const upload = require("../middleweres/multer");
 
 // User routes
 router.post("/user/add", authenticate, gpController.addUser);
@@ -26,8 +27,8 @@ router.post("/fund/request", authenticate, gpController.createFundRequest);
 router.get("/fund/requests", authenticate, gpController.getGpFundRequests);
 
 // Income and Expenditure routes
-router.post("/income", authenticate, gpController.createIncome);
-router.post("/expenditure", authenticate, gpController.createExpenditure);
+router.post("/income", authenticate, upload.single("document"), gpController.createIncome);
+router.post("/expenditure", authenticate,upload.single("document") ,gpController.createExpenditure);
 router.get("/income-expenditure", authenticate, gpController.getIncomeExpenditureList);
 
 // Notification routes

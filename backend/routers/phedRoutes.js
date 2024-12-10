@@ -75,7 +75,7 @@ router.patch("/alert/:id", authenticate, updateAlertStatus); // Get all alerts f
 /**
  * Finance Routes
  */
-router.post("/finance-overview/:gpId", authenticate, getFinanceOverview); // Get finance overview for a GP
+router.get("/finance-overview/:gpId", authenticate, getFinanceOverview); // Get finance overview for a GP
 
 /**
  * Asset Routes

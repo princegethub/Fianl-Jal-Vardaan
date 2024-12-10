@@ -41,11 +41,11 @@ export const gpApi = createApi({
     deleteConsumer: builder.mutation({
       query: ({ userId }) => ({
         url: `/user/delete/${userId}`, // URL with the userId in the URL path
-        method: 'DELETE', // Use DELETE method for deletion
+        method: "DELETE", // Use DELETE method for deletion
       }),
       invalidatesTags: (result, error, { userId }) => [
-        { type: 'Consumer', id: userId },
-        'Consumer', // Invalidate the entire 'Consumer' tag to refresh all related data
+        { type: "Consumer", id: userId },
+        "Consumer", // Invalidate the entire 'Consumer' tag to refresh all related data
       ],
       async onQueryStarted({ userId }, { queryFulfilled, dispatch }) {
         try {
@@ -57,7 +57,6 @@ export const gpApi = createApi({
         }
       },
     }),
-    
 
     updateConsumer: builder.mutation({
       query: ({ userId, updatedUser }) => ({
@@ -65,7 +64,9 @@ export const gpApi = createApi({
         method: "PUT",
         body: updatedUser,
       }),
-      invalidatesTags: (result, error, { userId }) => [{ type: "Consumer", id: userId }],
+      invalidatesTags: (result, error, { userId }) => [
+        { type: "Consumer", id: userId },
+      ],
     }),
 
     getActiveConsumer: builder.query({
@@ -151,39 +152,54 @@ export const gpApi = createApi({
       providesTags: ["Inventory"],
     }),
 
-    submitIncome: builder.mutation({
-      query: ({ category, amount, description, document }) => ({
-        url: `/income`,
-        method: "POST",
-        body: {
-          category,
-          amount,
-          description,
-          document,
-        },
-        headers: {
-          "Content-Type": "application/json",
-        },
+    getIncomeExpend: builder.query({
+      query: () => ({
+        url: "/income-expenditure",
+        method: "GET",
       }),
-      invalidatesTags: ["Asset", "Inventory"], // Refresh relevant data when income is submitted
+      providesTags: ["Inventory"],
     }),
 
-    submitExpenditure: builder.mutation({
-      query: ({ category, amount, description, document }) => ({
-        url: `/expenditure`,
-        method: "POST",
-        body: {
-          category,
-          amount,
-          description,
-          document,
-        },
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }),
-      invalidatesTags: ["Asset", "Inventory"], // Refresh relevant data when expenditure is submitted
-    }),
+// In your API service file (e.g., gpApi.js)
+submitIncome: builder.mutation({
+  query: ({ category, amount, description, document }) => {
+    const formData = new FormData();
+    formData.append("category", category);
+    formData.append("amount", amount);
+    formData.append("description", description);
+    if (document) {
+      formData.append("document", document);
+    }
+
+    return {
+      url: `/income`,
+      method: "POST",
+      body: formData, // Use FormData directly
+    };
+  },
+  invalidatesTags: ["Asset", "Inventory"],
+}),
+
+submitExpenditure: builder.mutation({
+  query: ({ category, amount, description, document }) => {
+    const formData = new FormData();
+    formData.append("category", category);
+    formData.append("amount", amount);
+    formData.append("description", description);
+    if (document) {
+      formData.append("document", document);
+    }
+
+    return {
+      url: `/expenditure`,
+      method: "POST",
+      body: formData, // Use FormData directly
+    };
+  },
+  invalidatesTags: ["Asset", "Inventory"],
+}),
+
+    
 
     getNotificationPhed: builder.query({
       query: () => ({
@@ -213,4 +229,5 @@ export const {
   useGetGpInventoryQuery,
   useSubmitIncomeMutation,
   useSubmitExpenditureMutation,
+  useGetIncomeExpendQuery
 } = gpApi;
