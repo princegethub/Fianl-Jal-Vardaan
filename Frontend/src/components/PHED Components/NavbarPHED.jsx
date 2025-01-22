@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Button from "../ui/Button";
 import Logo from "@/assets/Logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation, useLogoutMutation } from "@/features/api/authApi";
+import { toast } from "sonner";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-
+  const navigate = useNavigate();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -31,6 +33,20 @@ function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const [logout , {data, isSuccess, isError }] = useLogoutMutation();
+
+  const logouthandler = async () => {
+    let response = await logout();
+    console.log('response: ', response);
+    if (response?.data) {
+      navigate("/login");
+      toast.success(response.data.message || "Logout Successfully");
+    } else if (response?.error) {
+      toast.error(response.error.data.message || "Logout Failed");
+    }
+  };
+  
 
   return (
     <nav
@@ -137,10 +153,11 @@ function Navbar() {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/login">
-                    <button className="block px-4 py-2 w-full text-left hover:bg-gray-100">
+                    {/* <Link to="/login"> */}
+                    <button onClick={logouthandler} className="block px-4 py-2 w-full text-left hover:bg-gray-100">
                       Logout
-                    </button></Link>
+                    </button>
+                    {/* </Link> */}
                   </li>
                 </ul>
               </div>

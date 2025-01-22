@@ -393,61 +393,57 @@ exports.getGpFundRequests = async (req, res) => {
   }
 };
 
-// Create Income and link to GP's income array
-exports.createIncome = async (req, res) => {
+// Helper function to create income or expenditure
+const createTransaction = async (req, res, Model, transactionType) => {
+
   try {
-    const { category, amount, description, document } = req.body;
-    const newIncome = new Income({
+    const { category, amount, description } = req.body;
+    console.log('req.body: ', req.body);
+    const uploadedFile = req.file;
+    console.log('uploadedFile: ', uploadedFile);
+
+    if (!uploadedFile) {
+      return res.status(400).json({ message: "Document upload is required." });
+    }
+
+    // Create new document (Income or Expenditure)
+    const newTransaction = new Model({
       category,
       amount,
       description,
-      document,
+      document: uploadedFile.path, // Store Cloudinary file URL
     });
 
-    const savedIncome = await newIncome.save();
+    const savedTransaction = await newTransaction.save();
 
-    // Find GP by the logged-in user ID and push the new income ID into the GP's income array
-    await Grampanchayat.findByIdAndUpdate(
-      req.user.id,
-      { $push: { income: savedIncome._id } },
+    // Link to the Grampanchayat
+    const updatedGp = await Grampanchayat.findByIdAndUpdate(
+      req.user.id, // Ensure `req.user.gpId` is set in `authenticate` middleware
+      { $push: { [transactionType]: savedTransaction._id } },
       { new: true }
     );
 
-    res
-      .status(201)
-      .json({ message: "Income created successfully", data: savedIncome });
+    if (!updatedGp) {
+      return res.status(404).json({ message: "Grampanchayat not found" });
+    }
+
+    res.status(201).json({
+      message: `${transactionType.charAt(0).toUpperCase() + transactionType.slice(1)} created successfully`,
+      data: savedTransaction,
+    });
   } catch (error) {
-    res.status(500).json({ message: "Error creating income", error });
+    res.status(500).json({ message: `Error creating ${transactionType}`, error });
   }
 };
 
-// Create Expenditure and link to GP's expenditure array
-exports.createExpenditure = async (req, res) => {
-  try {
-    const { category, amount, description, document } = req.body;
-    const newExpenditure = new Expenditure({
-      category,
-      amount,
-      description,
-      document,
-    });
+// Create Income
+exports.createIncome = (req, res) => {
+  createTransaction(req, res, Income, "income");
+};
 
-    const savedExpenditure = await newExpenditure.save();
-
-    // Find GP by the logged-in user ID and push the new expenditure ID into the GP's expenditure array
-    await Grampanchayat.findByIdAndUpdate(
-      req.user.id,
-      { $push: { expenditure: savedExpenditure._id } },
-      { new: true }
-    );
-
-    res.status(201).json({
-      message: "Expenditure created successfully",
-      data: savedExpenditure,
-    });
-  } catch (error) {
-    res.status(500).json({ message: "Error creating expenditure", error });
-  }
+// Create Expenditure
+exports.createExpenditure = (req, res) => {
+  createTransaction(req, res, Expenditure, "expenditure");
 };
 
 // Get a list of all incomes and expenditures for the logged-in GP

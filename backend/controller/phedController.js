@@ -13,6 +13,7 @@ const { v4: uuidv4 } = require("uuid");
 
 const bcrypt = require("bcryptjs");
 
+
 const registerPhed = async (req, res) => {
   try {
     const { name, contact, email, phedId, password, role = "PHED" } = req.body; // Default role is 'PHED'
@@ -378,40 +379,45 @@ const getFinanceOverview = async (req, res) => {
     const phedId = req.user.id; // Assuming logged-in PHED's ID
     const { gpId } = req.params; // GP ID passed in params
 
-    // Fetch GP details along with its income and expenditure
+    // Fetch GP details along with populated income and expenditure
     const gpDetails = await Grampanchayat.findById(gpId)
-      .populate("income") // Populate income references
-      .populate("expenditure") // Populate expenditure references
-      .exec();
+    .populate({
+      path: 'income', // Populate the income field with full documents
+      select: 'amount category description date', // Select fields as needed
+    })
+    .populate({
+      path: 'expenditure', // Populate the expenditure field with full documents
+      select: 'amount category description date', // Select fields as needed
+    })
+    .exec();
+    console.log('gpDetails: ', gpDetails);
 
     if (!gpDetails) {
       return res.status(404).json({ message: "GP not found" });
     }
 
+    // Calculate total income and total expenditure
+    const totalIncome = gpDetails.income.reduce((sum, incomeItem) => sum + incomeItem.amount, 0);
+    const totalExpenditure = gpDetails.expenditure.reduce((sum, expenditureItem) => sum + expenditureItem.amount, 0);
+
     // Construct the finance overview data
     const financeOverviewData = {
       gpId: gpDetails._id,
-      income: gpDetails.income, // Array of Income documents
-      expenditure: gpDetails.expenditure, // Array of Expenditure documents
+      name: gpDetails.name,
+      income: gpDetails.income, // Populated Income documents
+      expenditure: gpDetails.expenditure, // Populated Expenditure documents
+      totalIncome: totalIncome, // Total income amount
+      totalExpenditure: totalExpenditure, // Total expenditure amount
     };
-
-    // Update the PHED's financeOverview field
-    const updatedPhed = await Phed.findOneAndUpdate(
-      { _id: phedId },
-      {
-        $push: { financeOverview: financeOverviewData },
-      },
-      { new: true }
-    );
-
-    if (!updatedPhed) {
-      return res.status(404).json({ message: "PHED not found" });
-    }
 
     res.status(200).json({
       success: true,
       message: "Finance Overview updated successfully",
-      data: updatedPhed.financeOverview,
+      data: {
+        financeOverview: financeOverviewData,
+        totalIncome: totalIncome,
+        totalExpenditure: totalExpenditure,
+      },
     });
   } catch (error) {
     console.error(error);
@@ -420,6 +426,11 @@ const getFinanceOverview = async (req, res) => {
       .json({ message: "Internal Server Error", error: error.message });
   }
 };
+
+
+
+
+
 const addGp = async (req, res) => {
   try {
     const phedId = req.user.id; // Ensure the request is from a PHED user

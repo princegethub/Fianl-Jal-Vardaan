@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Logo from "@/assets/Logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NotificationsDialog from "./Notfication_Dilog";
 import { useGetNotificationPhedQuery } from "@/features/api/gpApi";
+import { useLogoutMutation } from "@/features/api/authApi";
+import { toast } from "sonner";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,6 +57,21 @@ const { data, isSuccess, isError, isLoading } = useGetNotificationPhedQuery();
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const navigate = useNavigate();
+  
+  const [logout , {data: logoutdata, isSuccess: logoutSuccess, isError:logoutError }] = useLogoutMutation();
+
+  const logouthandler = async () => {
+    let response = await logout();
+    console.log('response: ', response);
+    if (response?.data) {
+      navigate("/login");
+      toast.success(response.data.message || "Logout Successfully");
+    } else if (response?.error) {
+      toast.error(response.error.data.message || "Logout Failed");
+    }
+  };
 
   return (
     <nav
@@ -187,11 +204,11 @@ const { data, isSuccess, isError, isLoading } = useGetNotificationPhedQuery();
                     </Link>
                   </li>
                   <li>
-                    <Link to="/login">
-                      <button className="block px-4 py-2 w-full text-left hover:bg-gray-100">
+                   
+                      <button onClick={logouthandler} className="block px-4 py-2 w-full text-left hover:bg-gray-100">
                         Logout
                       </button>
-                    </Link>
+                  
                   </li>
                 </ul>
               </div>

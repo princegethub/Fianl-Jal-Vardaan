@@ -18,11 +18,11 @@ function Assest_GP() {
   console.log("inventoryData", inventoryData);
   return (
     <div className="flex items-center flex-col gap-12 justify-center h-[90vh] bg-gradient-to-b from-[#4EB4F8] via-[#D8E9FF] to-white">
-      <div className="flex justify-between flex-col md:flex-row items-center w-full shadow-lg my-2 py-4 mx-auto rounded-lg">
+      <div className="flex justify-between flex-col md:flex-row items-center  shadow-lg w-[90vw]  py-4 mx-auto rounded-lg">
         <div className="flex justify-center items-center mx-auto">
           <span
             className={`mr-4 font-bold text-xl transition-colors duration-300 ease-in-out ${
-              !isActive ? "text-red-400" : "text-blue-800"
+              !isActive ? "text-blue-800" : "text-blue-400"
             }`}
           >
             Inventory
@@ -44,7 +44,7 @@ function Assest_GP() {
           </label>
           <span
             className={`ml-4 font-bold text-xl transition-colors duration-300 ease-in-out ${
-              isActive ? "text-green-800" : "text-blue-800"
+              isActive ?  "text-blue-800" : "text-blue-400"
             }`}
           >
             Assets

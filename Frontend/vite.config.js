@@ -1,13 +1,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path'; // Add this import for path resolution
+import svgr from 'vite-plugin-svgr';
+import path from 'path';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), svgr()],
   server: {
-    // host: '0.0.0.0', // External access ke liye
-    port: 5173,      // Default Vite port
+    port: 5173, // Default Vite port
   },
   resolve: {
     alias: {

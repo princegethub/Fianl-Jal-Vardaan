@@ -1,7 +1,6 @@
 import React from 'react';
 
 function DetailsCard({ gp, details, viewType, onBack }) {
-  console.log('details: ', details);
 
   // Check if details for the current viewType are valid
   const hasDetails = viewType === 'Asset'

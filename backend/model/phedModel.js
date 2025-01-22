@@ -32,16 +32,6 @@ const PhedSchema = new mongoose.Schema({
   ],
   firebaseToken: String,
 
-  financeOverview: [
-    {
-      gpId: { type: mongoose.Schema.Types.ObjectId, ref: "Gp", required: true },
-      income: [{ type: mongoose.Schema.Types.ObjectId, ref: "Income" }],
-      expenditure: [
-        { type: mongoose.Schema.Types.ObjectId, ref: "Expenditure" },
-      ],
-    },
-  ],
-
   phedAssest: [{ type: mongoose.Schema.Types.ObjectId, ref: "Asset" }],
   phedInventory: [{ type: mongoose.Schema.Types.ObjectId, ref: "Inventory" }],
 

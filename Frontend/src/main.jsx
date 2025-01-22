@@ -45,6 +45,9 @@ import AssestOverview from "./components/PHED Components/AsseetInvenotryOverview
 import { PersistGate } from "redux-persist/integration/react";
 import UserLayout from "./components/Users Component/UserLayout";
 import UserDeshboard from "./components/Users Component/UserDeshboard";
+import ResetPassword from "./components/ResetPassword";
+import FinanceOverview from "./components/PHED Components/FinanceOverviewPage";
+import UserBillPage from "./components/Users Component/UserBill";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,6 +59,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Public_Layout />} />
       <Route path="/" element={<Layout />}>
         <Route path="login" element={<Login />} />
+        <Route path="reset" element={<ResetPassword />} />
         <Route path="about" element={<About />} />
         <Route path="vision" element={<ZigZag />} />
         <Route path="contact" element={<BetterTomorrow />} />
@@ -73,6 +77,8 @@ const router = createBrowserRouter(
         <Route path="/phed/alerts" element={<AlertPage />} />
         <Route path="/phed/gpannouncement" element={<GpAnnouncement />} />
         <Route path="/phed/requestedfund" element={<RequestFundPage />} />
+        <Route path="/phed/finance" element={<FinanceOverview />} />
+        
       </Route>
 
       {/* GP Layout Route */}
@@ -98,6 +104,8 @@ const router = createBrowserRouter(
       <Route path="/user" element={<UserLayout/>} >
       
       <Route index element={<UserDeshboard />} />
+      <Route path="/user/bill" element={<UserBillPage />} />
+
       </Route>
 
 
