@@ -24,7 +24,9 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://fianl-jal-vardaan-frontend-iid8.onrender.com",
-      "https://fianl-jal-vardaan-frontend.onrender.com"
+      "https://fianl-jal-vardaan-frontend.onrender.com",
+      "https://fianl-jal-vardaan-forntend-d8q8.onrender.com"
+      
     
     ],
     credentials: true,
