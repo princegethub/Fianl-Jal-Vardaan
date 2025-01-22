@@ -195,6 +195,7 @@ submitExpenditure: builder.mutation({
       method: "POST",
       body: formData, // Use FormData directly
     };
+
   },
   invalidatesTags: ["Asset", "Inventory"],
 }),

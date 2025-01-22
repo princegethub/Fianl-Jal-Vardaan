@@ -1,51 +1,79 @@
-import React, { useState } from 'react'
-import Card from '../Card'
-import complaints from "../../assets/UsersIcons/complaints.svg"
-import WaterUsage from "../../assets/UsersIcons/waterUsage.svg"
-import ViewBills from "../../assets/UsersIcons/viewBills.svg"
-import gift from "../../assets/UsersIcons/gift-card.svg"
-import notification from "../../assets/UsersIcons/notification.svg"
-import quickPay from "../../assets/UsersIcons/quickPay.svg"
-import Slider from 'react-slick'
-import SlickSlider from '../PHED Components/Slider'
-
+import React, { useState, useEffect } from "react";
+import Card from "../Card";
+import complaints from "../../assets/UsersIcons/complaints.svg";
+import WaterUsage from "../../assets/UsersIcons/waterUsage.svg";
+import ViewBills from "../../assets/UsersIcons/viewBills.svg";
+import gift from "../../assets/UsersIcons/gift-card.svg";
+import notification from "../../assets/UsersIcons/notification.svg";
+import quickPay from "../../assets/UsersIcons/quickPay.svg";
+import aiIcon from "../../assets/UsersIcons/ai.png"; // AI Icon
+import SlickSlider from "../PHED Components/Slider";
 
 const services = [
   {
-    text: "ViewBills ",
+    text: "ViewBills",
     imageSrc: ViewBills,
-    route: "#", // Route for Manage GPs
+    route: "#",
   },
   {
-    text: "complaints",
+    text: "Complaints",
     imageSrc: complaints,
-    route: "#", // Route for Asset Inventory
+    route: "#",
   },
   {
-    text: "quickPay",
+    text: "QuickPay",
     imageSrc: quickPay,
-    route: "#", // Route for Alerts
+    route: "#",
   },
   {
-    text: "notification",
+    text: "Notification",
     imageSrc: notification,
-    route: "#", // Route for Inventory
+    route: "#",
   },
   {
     text: "Rewards",
     imageSrc: gift,
-    route: "#", // Route for GP Announcements
+    route: "#",
   },
   {
     text: "WaterUsage",
     imageSrc: WaterUsage,
-    route: "#", // Route for Financial Overview
+    route: "#",
   },
 ];
 
+export default function UserDashboard() {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-
-export default function UserDeshboard() {
+  // Function to initialize Kommunicate only once
+  useEffect(() => {
+    if (!window.kommunicate) {
+      (function (d, m) {
+        var kommunicateSettings = {
+          appId: "d6a1c706cb64c97e00c50ef770652ef3",
+          popupWidget: true,
+          automaticChatOpenOnNavigation: true,
+          theme: {
+            primaryColor: "#4EB4F8",
+            secondaryColor: "#1E90FF",
+            backgroundColor: "#FFFFFF",
+            headerBackgroundColor: "#4EB4F8",
+            chatBubblePrimaryBackgroundColor: "#E6F7FF",
+            chatBubbleSecondaryBackgroundColor: "#D9EAFB",
+            textColor: "#000000",
+          },
+        };
+        var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0];
+        h.appendChild(s);
+        window.kommunicate = m;
+        m._globals = kommunicateSettings;
+      })(document, window.kommunicate || {});
+    }
+  }, []);
 
   return (
     <>
@@ -57,13 +85,27 @@ export default function UserDeshboard() {
               key={index}
               imageSrc={service.imageSrc}
               text={service.text}
-              onClick={() => handleDashboardCard(service.route)} // Pass route dynamically
             />
           ))}
         </div>
-      </div>
-    </>
 
-    
-  )
+       
+      </div>
+
+      {/* Chatbot Modal */}
+      {isDialogOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-lg font-semibold mb-4">AI Chatbot</h2>
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded w-full"
+              onClick={() => setIsDialogOpen(false)}
+            >
+              Close Chatbot
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }

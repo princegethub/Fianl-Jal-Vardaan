@@ -5,7 +5,13 @@ const { Grampanchayat } = require("../model/gpModel");
 const { User } = require("../model/userModel");
 const nodemailer = require("nodemailer");
 
-const crypto = require("crypto");
+require('dotenv').config();
+// controllers/paymentController.js
+const Razorpay = require('razorpay');
+const crypto = require('crypto');
+
+
+
 
 const userModels = {
   PHED: Phed,
@@ -98,6 +104,129 @@ const loginUser = async (req, res) => {
     return res.status(500).json({ message: "Server error" });
   }
 };
+
+
+const editProfile = async (req, res) => {
+  try {
+    // Log the received request to debug
+    console.log('req.body:', req.body);
+    console.log('req.file:', req.file);
+
+    // Extract role and id from the body
+    const { role, id } = req.body;
+    const profilePicture = req.file?.path;
+
+    // Check for required fields
+    if (!role || !id) {
+      return res.status(400).json({ message: "Role and ID are required" });
+    }
+
+    if (!profilePicture) {
+      return res.status(400).json({ message: "Profile picture is required" });
+    }
+
+    // Map role to model dynamically
+    const model = userModels[role];
+
+    if (!model) {
+      return res.status(400).json({ message: "Invalid role specified" });
+    }
+
+    // Create the query based on the role
+    let query;
+    switch (role) {
+      case 'PHED':
+        query = { phedId: id };
+        break;
+      case 'GP':
+        query = { grampanchayatId: id };
+        break;
+      case 'USER':
+        query = { consumerId: id };
+        break;
+      default:
+        return res.status(400).json({ message: "Invalid role specified" });
+    }
+
+    // Find and update the record
+    const updatedRecord = await model.findOneAndUpdate(query, { profilePicture }, { new: true });
+
+    if (!updatedRecord) {
+      return res.status(404).json({ message: "Record not found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      data: updatedRecord,
+    });
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+const razorpay = new Razorpay({
+  key_id: process.env.ROZER_PAY_KEY_ID,
+  key_secret: process.env.ROZER_PAY_KEY_SECRET,
+});
+
+// Create Order (API)
+const createOrder = async (req, res) => {
+  try {
+    const { amount } = req.body; // Amount should be in paise (1 INR = 100 paise)
+
+    const options = {
+      amount: amount * 100, // Convert to paise
+      currency: 'INR',
+      receipt: crypto.randomBytes(10).toString('hex'),
+      payment_capture: 1,
+    };
+
+    const order = await razorpay.orders.create(options);
+
+    res.json({
+      id: order.id,
+      currency: order.currency,
+      amount: order.amount / 100, // Convert back to INR
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to create Razorpay order' });
+  }
+};
+
+// Handle Razorpay Payment Success (Callback)
+const paymentCallback = (req, res) => {
+  const { payment_id, order_id, signature } = req.body;
+
+  const shasum = crypto.createHmac('sha256', process.env.ROZER_PAY_KEY_SECRET);
+  shasum.update(order_id + "|" + payment_id);
+  const generated_signature = shasum.digest('hex');
+
+  if (generated_signature === signature) {
+    res.json({ message: 'Payment success' });
+  } else {
+    res.status(400).json({ message: 'Payment verification failed' });
+  }
+};
+
+
+
+
+
 
 const logout = async (req, res) => {
   try {
@@ -350,9 +479,26 @@ const resetPassword = async (req, res) => {
   }
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = {
   loginUser,
   logout,
   forgotPassword,
   resetPassword,
+  editProfile,
+  paymentCallback,
+  createOrder
+
 };

@@ -29,7 +29,6 @@ app.use(
   })
 );
 
-
 app.use(cookieParser());
 
 app.use((req, res, next) => {

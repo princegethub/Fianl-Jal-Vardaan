@@ -2,12 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLoggedIn, userLoggedOut } from "../authSlice";
 import { useDispatch } from "react-redux";
 
-
 const AUTH_API = import.meta.env.VITE_AUTH_API;
-
-// const dispatch = useDispatch();
-
-
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -18,7 +13,7 @@ export const authApi = createApi({
       return headers;
     },
   }),
-  
+
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (inputData) => ({
@@ -31,16 +26,14 @@ export const authApi = createApi({
           const { data } = await queryFulfilled;
           localStorage.setItem("token", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
-
           dispatch(userLoggedIn({ user: data.user, token: data.token }));
         } catch (error) {
           console.error("Login error:", error);
-          throw error; // Optionally rethrow or handle the error in the UI
+          throw error;
         }
       },
     }),
 
-    
     fogetPassword: builder.mutation({
       query: (inputData) => ({
         url: "/forgat-paasword",
@@ -52,14 +45,14 @@ export const authApi = createApi({
           const { data } = await queryFulfilled;
           localStorage.setItem("token", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
-
           dispatch(userLoggedIn({ user: data.user, token: data.token }));
         } catch (error) {
           console.error("Login error:", error);
-          throw error; // Optionally rethrow or handle the error in the UI
+          throw error;
         }
       },
     }),
+
     resetPassword: builder.mutation({
       query: (inputData) => ({
         url: "/reset-paasword",
@@ -71,15 +64,60 @@ export const authApi = createApi({
           const { data } = await queryFulfilled;
           localStorage.setItem("token", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
-
           dispatch(userLoggedIn({ user: data.user, token: data.token }));
         } catch (error) {
           console.error("Login error:", error);
-          throw error; // Optionally rethrow or handle the error in the UI
+          throw error;
         }
       },
     }),
-    
+
+    profileUpdate: builder.mutation({
+      query: (formData) => ({
+        url: '/edit-profile',
+        method: 'POST',
+        body: formData,
+      }),
+      invalidatesTags: [],
+    }),
+
+    // New endpoint for creating an order (payment creation)
+    createPayment: builder.mutation({
+      query: (orderData) => ({
+        url: "/create-order",  // Order creation route
+        method: "POST",
+        body: orderData,  // Order data to be sent in the request
+      }),
+      async onQueryStarted(args, { queryFulfilled, dispatch }) {
+        try {
+          const { data } = await queryFulfilled;
+          // Handle order creation success, e.g., store order details or show success message
+          console.log("Order created successfully:", data);
+        } catch (error) {
+          console.error("Order creation error:", error);
+          throw error;
+        }
+      },
+    }),
+
+    // New endpoint for handling payment callback after payment
+    verifyPayment: builder.mutation({
+      query: (paymentData) => ({
+        url: "/payment-callback",  // Payment callback route
+        method: "POST",
+        body: paymentData,  // Payment callback data to be sent in the request
+      }),
+      async onQueryStarted(args, { queryFulfilled, dispatch }) {
+        try {
+          const { data } = await queryFulfilled;
+          // Handle payment callback success, e.g., update payment status or show success message
+          console.log("Payment callback successful:", data);
+        } catch (error) {
+          console.error("Payment callback error:", error);
+          throw error;
+        }
+      },
+    }),
 
     logout: builder.mutation({
       query: () => ({
@@ -97,8 +135,15 @@ export const authApi = createApi({
         }
       },
     }),
-    
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation , useFogetPasswordMutation, useResetPasswordMutation } = authApi;
+export const { 
+  useLoginMutation, 
+  useLogoutMutation,
+  useFogetPasswordMutation, 
+  useResetPasswordMutation, 
+  useProfileUpdateMutation, 
+  useCreatePaymentMutation,
+  useVerifyPaymentMutation 
+} = authApi;

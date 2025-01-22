@@ -47,6 +47,7 @@ import UserLayout from "./components/Users Component/UserLayout";
 import UserDeshboard from "./components/Users Component/UserDeshboard";
 import ResetPassword from "./components/ResetPassword";
 import FinanceOverview from "./components/PHED Components/FinanceOverviewPage";
+import UserBillPage from "./components/Users Component/UserBill";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -103,6 +104,8 @@ const router = createBrowserRouter(
       <Route path="/user" element={<UserLayout/>} >
       
       <Route index element={<UserDeshboard />} />
+      <Route path="/user/bill" element={<UserBillPage />} />
+
       </Route>
 
 
